@@ -26,3 +26,9 @@
 /* Get the byte type of a char.
  */
 int bytetype(unsigned char c);
+
+void writebytes(int bytes);
+
+/* Decode a UTF-8 string to bytes.
+ */
+void decode(char* unicode);
