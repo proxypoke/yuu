@@ -60,6 +60,10 @@ void decode(char* unicode) {
 					break;
 				case LEAD2:
 					cont = 1;
+					/* Doing a bitwise AND with the complement of a LEAD byte
+					 * will cause the bits belonging to the LEAD byte to be
+					 * eleminated, leaving the bits we care about.
+					 */
 					result = c & (~LEAD2);
 					break;
 				case LEAD3:
@@ -101,7 +105,13 @@ void decode(char* unicode) {
 
 			/* 3 bytes */
 			if (result > 0x10000) {
+				/* Get only the bits in the third byte. Everything above it
+				 * should be zeroed bits.
+				 */
 				putchar(result >> 16);
+				/* This bitwise AND eliminates all bits above 2 bytes, since
+				 * we don't care about those anymore
+				 */
 				result &= 0xFFFF; }
 			/* 2 bytes */
 			if (result > 0x100) {
