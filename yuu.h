@@ -10,14 +10,18 @@
  *
  */
 
-#define ASCII	0	/* An ASCII byte starts with 0 */
-#define CONT	2	/* A continuation byte starts with the bits 10 */
-					/* Lead bytes start with: */
-#define LEAD2	6	/* 110 */
-#define LEAD3	14	/* 1110 */
-#define LEAD4	30	/* 11110 */
+/* the respective byte types are always smaller
+ * than their representative values, not accounting
+ * for invalid bytes
+ */
+#define ASCII	128
+#define CONT	192
 
-#define INVALID	-1	/* an invalid byte */
+#define LEAD2	224
+#define LEAD3	240
+#define LEAD4	245
+
+#define INVALID -1
 
 /* Get the byte type of a char.
  */

@@ -16,37 +16,31 @@
 #include "yuu.h"
 
 int bytetype(unsigned char c) {
-	if ((c >> 7) == ASCII) {
-		/* printf("%d - ASCII\n", c); */
+	if (c < ASCII) {
+		printf("%d - ASCII\n", c);
 		return ASCII; }
-	else if ((c >> 6) == CONT) {
-		/* printf("%d - CONT\n", c); */
+	else if (c < CONT) {
+		printf("%d - CONT\n", c);
 		return CONT; }
-	else if ((c >> 5) == LEAD2) {
+	else if (c == 192 || c == 193) {
 		/* 192 and 193 are invalid 2 byte sequences */
-		if (c <= 193) {
-			/* printf("%d - INVALID\n", c); */
-			return INVALID; }
-		else {
-			/* printf("%d - LEAD2\n", c); */
-			return LEAD2; } }
-	else if ((c >> 4) == LEAD3) {
-		/* printf("%d - LEAD3\n", c); */
+		printf("%d - INVALID\n", c);
+		return INVALID; }
+	else if (c < LEAD2) {
+		printf("%d - LEAD2\n", c);
+		return LEAD2; }
+	else if (c < LEAD3) {
+		printf("%d - LEAD3\n", c);
 		return LEAD3; }
-	else if ((c >> 3) == LEAD4) {
-		/* 245 to 253 are invalid 4 byte sequences */
-		if (c >= 245) {
-			/* printf("%d - INVALID\n", c); */
-			return INVALID; }
-		else {
-			/* printf("%d - LEAD4\n", c); */
-			return LEAD4; } }
+	else if (c < LEAD4) {
+		printf("%d - LEAD4\n", c);
+		return LEAD4; }
 	else {
-		/* printf("%d - INVALID\n", c); */
+		printf("%d - INVALID\n", c);
 		return INVALID; } }
 
 int main(void) {
-	/*
+	//*
 	for (int i = 0; i <= 255; ++i) {
 		bytetype(i); }
 	//*/
